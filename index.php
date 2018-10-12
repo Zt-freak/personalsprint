@@ -4,9 +4,20 @@
         <link rel="stylesheet" type="text/css" href="styles.css">
     </head>
     <body>
-        <h1>Welcome to Fabio's Secret Lair</h1>
+        <h1>Welcome to Fabio's secret webscraper!</h1>
         <div class="slider">
-            <div id="slide1" class="slide">
+            <?php
+                $html = file_get_contents('https://commons.wikimedia.org/wiki/Coats_of_arms_of_the_Soviet_Republics');
+
+                preg_match_all( '|<img.*?src=[\'"](.*?)[\'"].*?>|i',$html, $matches );
+
+                for ($i = 0; $i < (count($matches[1])); $i++) {
+                    echo "<div id='slide".$i."' class='slide'>";
+                    echo "<img class='photo' src='".$matches[1][$i]."' />";
+                    echo "</div>";
+                }
+            ?>
+            <!--<div id="slide1" class="slide">
                 <img class="photo" src="https://pbs.twimg.com/profile_images/1748455380/fabio__1__400x400.jpg">
             </div>
             <div id="slide2" class="slide">
@@ -23,7 +34,7 @@
             </div>
             <div id="slide6" class="slide">
                 <img class="photo" src="https://www.ems-industrial.com/wp-content/uploads/2017/11/Lucas-Fabio-2.jpg">
-            </div>
+            </div>-->
         </div>
         
         <div class="container">
